@@ -2,7 +2,7 @@
   "name": "ampify",
   "version": "0.2.6",
   "description": "Convert plain HTML to Google Accelerated Mobile Pages (AMP)",
-  "main": "index.js",
+  "main": "lib/index.js",
   "author": {
     "name": "rkazakov",
     "email": "ruslan.kazakov@gmail.com"
