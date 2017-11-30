@@ -69,4 +69,26 @@ describe('ampify', function() {
 		$ = cheerio.load(out);
 		expect($('meta[name="amp-google-client-id-api"]')).to.have.length(1);
 	});
+
+	describe('canonical', () => {
+		it('should set canonical', () => {
+			const out = ampify('<html><head></head></html>', {
+				canonical: '/foo'
+			});
+			$ = cheerio.load(out);
+			const canon = $('link[rel="canonical"]');
+			expect(canon).to.have.length(1);
+			expect(canon.attr('href')).to.equal('/foo');
+		});
+
+		it('keeps canonical', () => {
+			const out = ampify('<html><head><link rel="canonical" href="/bar" /></head></html>', {
+				canonical: '/foo'
+			});
+			$ = cheerio.load(out);
+			const canon = $('link[rel="canonical"]');
+			expect(canon).to.have.length(1);
+			expect(canon.attr('href')).to.equal('/bar');
+		});
+	});
 });
