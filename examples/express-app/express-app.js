@@ -1,4 +1,4 @@
-const ampify = require('ampify');
+const ampify = require('ampify').core;
 const express = require('express');
 
 const app = express();
@@ -17,7 +17,7 @@ app.get('/article', (req, res) => {
     </html>
   `;
 
-	const amp = ampify(html, {cwd: 'amp'});
+	const amp = ampify(html);
 	res.send(amp); // serving AMP content
 });
 

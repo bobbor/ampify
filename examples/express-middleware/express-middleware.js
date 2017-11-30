@@ -1,20 +1,9 @@
-const ampify = require('ampify');
+const ampify = require('ampify').middleware;
 const express = require('express');
 
 const app = express();
 
-app.use((req, res, next) => {
-	if (req.url.startsWith('/amp')) {
-		const send = res.send;
-		res.send = function (html) {
-			const amp = ampify(html, {cwd: 'amp'});
-			send.call(this, amp);
-		};
-	}
-	next();
-});
-
-app.get('/amp/article', (req, res) => {
+app.get('/amp/article', ampify, (req, res) => {
 	const html = `
 		<html>
 			<head>
